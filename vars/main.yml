@@ -1,15 +1,12 @@
 ---
 mautrix_telegram_base_config:
-  homeserver:
-      address: https://example.com
-      domain: example.com
-      verify_ssl: true
+  homeserver: "{{ mautrix_telegram_homeserver }}"
   appservice:
-      address: http://localhost:29317
+      address: "{{ mautrix_telegram_appservice_address }}"
       hostname: 0.0.0.0
       port: 29317
       max_body_size: 1
-      database: sqlite:///mautrix-telegram.db
+      database: "{{ mautrix_telegram_database }}"
       public:
           enabled: false
           prefix: /public
@@ -27,20 +24,16 @@ mautrix_telegram_base_config:
 
       community_id: false
 
-      as_token: "This value is generated when generating the registration"
-      hs_token: "This value is generated when generating the registration"
+      as_token: "{{ as_token }}"
+      hs_token: "{{ hs_token }}"
 
   metrics:
       enabled: false
       listen_port: 8000
 
   manhole:
-      # Whether or not opening the manhole is allowed.
       enabled: false
-      # The path for the unix socket.
       path: /var/tmp/mautrix-telegram.manhole
-      # The list of UIDs who can be added to the whitelist.
-      # If empty, any UIDs can be specified in the open-manhole command.
       whitelist:
       - 0
 
@@ -139,7 +132,7 @@ mautrix_telegram_base_config:
           - 12345678
 
   telegram:
-      api_id: "{{ mautrix_telegram_api_id }}" 
+      api_id: "{{ mautrix_telegram_api_id }}"
       api_hash: "{{ mautrix_telegram_api_hash }}"
       bot_token: "{{ mautrix_telegram_bot_token }}"
 
