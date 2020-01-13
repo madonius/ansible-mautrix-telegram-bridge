@@ -1,0 +1,8 @@
+---
+- name: Check if api-authentication or bot token is set
+  fail:
+    msg: Please provide either the api-id and hash or a bot token
+  when:
+    - mautrix_telegram_api_id == ''
+    - mautrix_telegram_api_hash == ''
+    - mautrix_telegram_bot_token == ''

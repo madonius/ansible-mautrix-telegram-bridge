@@ -1,4 +1,7 @@
 ---
+- name: Check input for validity
+  import_tasks: verify_input.yml
+
 - name: Configure mautrix telegram bridge
   import_tasks: configure.yml
 
