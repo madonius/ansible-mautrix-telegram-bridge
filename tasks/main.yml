@@ -1,2 +1,9 @@
 ---
-# tasks file for ansible-matrix-telegram-bridge
+- name: Configure mautrix telegram bridge
+  import_tasks: configure.yml
+
+- name: Deploy mautrix telegram bridge
+  import_tasks: deploy.yml
+
+- name: Configure the service
+  import_tasks: systemd.yml

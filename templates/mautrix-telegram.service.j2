@@ -1,0 +1,15 @@
+[Unit]
+Description="Mautrix Telegram Bridge"
+
+[Service]
+Type=simple
+WorkingDirectory={{ mautrix_telegram_base_path }}
+ExecStart={{ mautrix_telegram_base_path }}/env/bin/python -m mautrix_telegram -c {{ mautrix_telegram_base_path }}/config.yaml
+User=mautrix-telegram
+Group=mautrix-telegram
+Restart=always
+StandardOutput=syslog
+SyslogIdentifier=mautrix_telegram
+
+[Install]
+WantedBy=default.target

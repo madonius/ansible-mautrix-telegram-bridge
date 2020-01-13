@@ -1,0 +1,10 @@
+{{ ansible_managed | comment }}
+{{ mautrix_telegam_log_dir }}/mautrix_telegram.log {
+    daily
+    rotate {{ mautrix_telegram_log_days_keep }}
+    compress
+    shred
+    postrotate
+      /usr/bin/pkill -HUP rsyslogd
+    endscript
+}

@@ -1,2 +1,11 @@
 ---
-# defaults file for ansible-matrix-telegram-bridge
+mautrix_telegram_homeserver:
+  address: https://example.com
+  domain: example.com
+  verify_ssl: true
+
+mautrix_telegram_base_path: "/opt/mautrix_telegram/"
+mautrix_telegram_secret_path: "{{ mautrix_telegram_secret_path }}/secrets"
+mautrix_telegram_log_dir: "/var/log/mautrix_telegram/"
+mautrix_telegram_appservice_address: "http://localhost:29317"
+mautrix_telegram_database: "sqlite:///mautrix-telegram.db"

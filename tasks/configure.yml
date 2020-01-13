@@ -1,0 +1,50 @@
+---
+- name: Create user
+  user:
+    name: mautrix-telegram
+    state: present
+  register: mautrix_user
+  tags:
+    - pre_install
+
+- name: Create directory
+  file:
+    path: "{{ mautrix_telegram_base_path }}"
+    state: directory
+    owner: mautrix-telegram
+    group: mautrix-telegram
+  tags:
+    - pre_install
+
+- name: Create secrets directory
+  file:
+    path: "{{ mautrix_telegram_secrets_path }}"
+    state: directory
+    owner: mautrix-telegram
+    group: mautrix-telegram
+  tags:
+    - pre_install
+
+- name: Generate secrets
+  include_tasks: generate_secret.yml
+  loop:
+    - file: "as.token"
+      var: "as_token"
+    - file: "hs.token"
+      var: "hs_token"
+    - file: "shared.secret"
+      var: "shared_secret"
+  loop_control:
+    loop_var: secret
+
+- name: Deploy config
+  copy:
+    content: "{{ mautrix_telegram_config | to_nice_yaml }}"
+    dest: "{{ mautrix_telegram_base_path }}/config.yaml"
+    owner: mautrix-telegram 
+    group: mautrix-telegram
+  notify:
+    - "restart matrix-synapse"
+
+- name: Configure logging
+  import_tasks: logging.yml

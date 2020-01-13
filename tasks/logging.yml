@@ -1,0 +1,21 @@
+---
+- name: Create logging folder
+  file:
+    name: "{{ mautrix_telegram_log_dir }}"
+    state: direcotry
+    owner: mautrix-telegram
+    group: mautrix-telegram
+
+- name: Copy syslog config
+  template:
+    src: syslog-mautrix-telegram.conf.j2
+    dest: /etc/rsyslog.d/mautrix-telegram.conf
+    owner: root
+  notify: restart rsyslog
+
+- name: Configure logrotate
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/mautrix_telegram
+    owner: root
+

@@ -1,0 +1,32 @@
+---
+- name: Install matrix bridge dependencies
+  apt:
+    name:
+      - git
+      - build-essential
+      - python3-dev
+      - python-virtualenv
+      - python-pip
+      - python-setuptools
+    state: present
+  tags:
+    - pre_install
+
+- name: Create virtualenv
+  pip:
+    name:
+      - pip
+      - setuptools
+    virtualenv: "{{ mautrix_telegram_base_path }}/env"
+    virtualenv_python: python3
+    extra_args: --upgrade
+  tags:
+    - pre_install
+
+- name: Install mautrix telegram
+  pip:
+    name: "{{ mautrix_telegram_base_path }}/[all] }}"
+    virtualenv: "{{ mautrix_telegram_base_path }}/env"
+  tags:
+    - skip_ansible_lint
+    - pre_install

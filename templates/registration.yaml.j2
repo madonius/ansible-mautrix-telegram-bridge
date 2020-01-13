@@ -1,0 +1,13 @@
+id: telegram
+as_token: {{ as_token }}
+hs_token: {{ hs_token }}
+namespaces:
+  users:
+  - exclusive: true
+    regex: '@telegram_.+'
+  aliases:
+  - exclusive: true
+    regex: '#telegram_.+'
+url: {{ mautrix_telegram_appservice_address }} 
+sender_localpart: telegram
+rate_limited: false
