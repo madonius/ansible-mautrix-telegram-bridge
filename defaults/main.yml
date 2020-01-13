@@ -4,6 +4,9 @@ mautrix_telegram_homeserver:
   domain: example.com
   verify_ssl: true
 
+mautrix_telegram_api_id: ''
+mautrix_telegram_api_hash: ''
+mautrix_telegram_bot_token: ''
 mautrix_telegram_base_path: "/opt/mautrix_telegram/"
 mautrix_telegram_secret_path: "{{ mautrix_telegram_secret_path }}/secrets"
 mautrix_telegram_log_dir: "/var/log/mautrix_telegram/"
